@@ -1,0 +1,134 @@
+<!--
+README:
+Browser Environment Dashboard
+This webpage displays student profile information and provides a developer-style dashboard
+using JavaScript browser objects. It shows browser, screen, and page info, allows navigation
+controls, and dynamically changes background color based on screen width.
+All CSS and JavaScript are embedded in this single file.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Browser Environment Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #f5f5f5;
+      background-color: #121212; 
+      transition: background-color 0.3s ease;
+    }
+    header {
+      background-color: #ff8c00; 
+      color: #000;
+      padding: 20px;
+      text-align: center;
+    }
+    section {
+      padding: 20px;
+      border-bottom: 1px solid #333;
+    }
+    h2 {
+      color: #ff8c00; 
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff8c00; 
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ffa733; 
+    }
+  </style>
+</head>
+<body>
+  <!-- Profile Information -->
+  <header>
+    <h1>Student Profile</h1>
+    <p><strong>Complete Name:</strong> Mark Emil D. Sola</p>
+    <p><strong>Sex:</strong> Male</p>
+    <p><strong>Address:</strong> Camagong, San Jose, Camarines Sur</p>
+    <p><strong>Course, Year & Section:</strong> BSIT-2D</p>
+    <p><strong>Name of School:</strong> Partido State University</p>
+    <p><strong>Semester & Academic Year:</strong> 2nd Semester, AY 2025–2026</p>
+    <p><strong>Subject Code & Title:</strong> PF2 - Event Driven Programming</p>
+    <p><strong>Instructor:</strong>Arjay F. Abio</p>
+  </header>
+
+  <!-- Browser Information -->
+  <section>
+    <h2>Browser Information</h2>
+    <p id="browser"></p>
+    <p id="platform"></p>
+    <p id="java"></p>
+    <p id="resolution"></p>
+    <p id="availablesize"></p>
+    <p id="colordepth"></p>
+  </section>
+
+  <!-- Page Information and Controls -->
+  <section>
+    <h2>Page Information & Controls</h2>
+    <p id="url"></p>
+    <p id="hostname"></p>
+    <p id="title"></p>
+    <button onclick="changeTitle()">Change Page Title</button>
+  </section>
+
+  <!-- Navigation Controls -->
+  <section>
+    <h2>Navigation Controls</h2>
+    <button onclick="location.reload()">Reload Page</button>
+    <button onclick="location.href='https://www.example.com'">Go to Example.com</button>
+    <button onclick="history.back()">Go Back</button>
+    <button onclick="history.forward()">Go Forward</button>
+  </section>
+
+  <script>
+    // Browser Information
+    document.getElementById("browser").textContent = "Browser: " + navigator.userAgent;
+    document.getElementById("platform").textContent = "Platform: " + navigator.platform;
+    document.getElementById("java").textContent = "Java Enabled: " + navigator.javaEnabled();
+    document.getElementById("resolution").textContent = "Screen Resolution: " + screen.width + " x " + screen.height;
+    document.getElementById("availablesize").textContent = "Available Screen Size: " + screen.availWidth + " x " + screen.availHeight;
+    document.getElementById("colordepth").textContent = "Color Depth: " + screen.colorDepth;
+
+    // Page Information
+    document.getElementById("url").textContent = "Current URL: " + location.href;
+    document.getElementById("hostname").textContent = "Hostname: " + location.hostname;
+    document.getElementById("title").textContent = "Page Title: " + document.title;
+
+    // Function to change the page title dynamically
+    function changeTitle() {
+      let newTitle = prompt("Enter new page title:");
+      if (newTitle) {
+        document.title = newTitle;
+        document.getElementById("title").textContent = "Page Title: " + document.title;
+      }
+    }
+
+    // Dynamic Styling with Screen Info
+
+    function setBackground() {
+      let width = window.innerWidth;
+      if (width < 600) {
+        document.body.style.backgroundColor = "#1e3a5f"; // for mobile
+      } else if (width < 992) {
+        document.body.style.backgroundColor = "#2e5f3a"; // for tablet
+      } else {
+        document.body.style.backgroundColor = "#1e1e1e"; // for desktop
+      }
+    }
+    window.onload = setBackground;
+    window.onresize = setBackground;
+  </script>
+</body>
+</html>
